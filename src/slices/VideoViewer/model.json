@@ -1,0 +1,47 @@
+{
+  "id": "video_viewer",
+  "type": "SharedSlice",
+  "name": "VideoViewer",
+  "description": "VideoViewer",
+  "variations": [
+    {
+      "id": "default",
+      "name": "Default",
+      "docURL": "...",
+      "version": "initial",
+      "description": "Default",
+      "imageUrl": "",
+      "primary": {
+        "title": {
+          "type": "Text",
+          "config": {
+            "label": "Title",
+            "placeholder": ""
+          }
+        },
+        "video": {
+          "type": "Embed",
+          "config": {
+            "label": "Video",
+            "placeholder": ""
+          }
+        },
+        "height": {
+          "type": "Text",
+          "config": {
+            "label": "Height",
+            "placeholder": ""
+          }
+        },
+        "width": {
+          "type": "Text",
+          "config": {
+            "label": "Width",
+            "placeholder": ""
+          }
+        }
+      },
+      "items": {}
+    }
+  ]
+}

@@ -35,6 +35,15 @@
         "fieldset": "Slice Zone",
         "config": {
           "choices": {
+            "video_viewer": {
+              "type": "SharedSlice"
+            },
+            "person": {
+              "type": "SharedSlice"
+            },
+            "table": {
+              "type": "SharedSlice"
+            },
             "hero": {
               "type": "SharedSlice"
             },

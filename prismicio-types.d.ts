@@ -127,6 +127,9 @@ export type NavigationDocument<Lang extends string = string> =
   >;
 
 type PageDocumentDataSlicesSlice =
+  | VideoViewerSlice
+  | PersonSlice
+  | TableSlice
   | HeroSlice
   | QuoteSlice
   | TextSlice
@@ -518,6 +521,78 @@ export type ImageCardsSlice = prismic.SharedSlice<
 >;
 
 /**
+ * Primary content in *Person → Default → Primary*
+ */
+export interface PersonSliceDefaultPrimary {
+  /**
+   * Name field in *Person → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: person.default.primary.name
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  name: prismic.KeyTextField;
+
+  /**
+   * Job Title field in *Person → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: person.default.primary.job_title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  job_title: prismic.KeyTextField;
+
+  /**
+   * Description field in *Person → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: person.default.primary.description
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  description: prismic.RichTextField;
+
+  /**
+   * Image field in *Person → Default → Primary*
+   *
+   * - **Field Type**: Image
+   * - **Placeholder**: *None*
+   * - **API ID Path**: person.default.primary.image
+   * - **Documentation**: https://prismic.io/docs/fields/image
+   */
+  image: prismic.ImageField<never>;
+}
+
+/**
+ * Default variation for Person Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PersonSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<PersonSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Person*
+ */
+type PersonSliceVariation = PersonSliceDefault;
+
+/**
+ * Person Shared Slice
+ *
+ * - **API ID**: `person`
+ * - **Description**: Person
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type PersonSlice = prismic.SharedSlice<"person", PersonSliceVariation>;
+
+/**
  * Primary content in *Quote → Default → Primary*
  */
 export interface QuoteSliceDefaultPrimary {
@@ -568,6 +643,58 @@ type QuoteSliceVariation = QuoteSliceDefault;
  * - **Documentation**: https://prismic.io/docs/slices
  */
 export type QuoteSlice = prismic.SharedSlice<"quote", QuoteSliceVariation>;
+
+/**
+ * Primary content in *Table → Default → Primary*
+ */
+export interface TableSliceDefaultPrimary {
+  /**
+   * Title field in *Table → Default → Primary*
+   *
+   * - **Field Type**: Rich Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/rich-text
+   */
+  title: prismic.RichTextField;
+
+  /**
+   * Table field in *Table → Default → Primary*
+   *
+   * - **Field Type**: Table
+   * - **Placeholder**: *None*
+   * - **API ID Path**: table.default.primary.table
+   * - **Documentation**: https://prismic.io/docs/fields/table
+   */
+  table: prismic.TableField;
+}
+
+/**
+ * Default variation for Table Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TableSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<TableSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *Table*
+ */
+type TableSliceVariation = TableSliceDefault;
+
+/**
+ * Table Shared Slice
+ *
+ * - **API ID**: `table`
+ * - **Description**: Table
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type TableSlice = prismic.SharedSlice<"table", TableSliceVariation>;
 
 /**
  * Primary content in *Text → Default → Primary*
@@ -760,6 +887,81 @@ export type TextWithImageSlice = prismic.SharedSlice<
   TextWithImageSliceVariation
 >;
 
+/**
+ * Primary content in *VideoViewer → Default → Primary*
+ */
+export interface VideoViewerSliceDefaultPrimary {
+  /**
+   * Title field in *VideoViewer → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_viewer.default.primary.title
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  title: prismic.KeyTextField;
+
+  /**
+   * Video field in *VideoViewer → Default → Primary*
+   *
+   * - **Field Type**: Embed
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_viewer.default.primary.video
+   * - **Documentation**: https://prismic.io/docs/fields/embed
+   */
+  video: prismic.EmbedField;
+
+  /**
+   * Height field in *VideoViewer → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_viewer.default.primary.height
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  height: prismic.KeyTextField;
+
+  /**
+   * Width field in *VideoViewer → Default → Primary*
+   *
+   * - **Field Type**: Text
+   * - **Placeholder**: *None*
+   * - **API ID Path**: video_viewer.default.primary.width
+   * - **Documentation**: https://prismic.io/docs/fields/text
+   */
+  width: prismic.KeyTextField;
+}
+
+/**
+ * Default variation for VideoViewer Slice
+ *
+ * - **API ID**: `default`
+ * - **Description**: Default
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type VideoViewerSliceDefault = prismic.SharedSliceVariation<
+  "default",
+  Simplify<VideoViewerSliceDefaultPrimary>,
+  never
+>;
+
+/**
+ * Slice variation for *VideoViewer*
+ */
+type VideoViewerSliceVariation = VideoViewerSliceDefault;
+
+/**
+ * VideoViewer Shared Slice
+ *
+ * - **API ID**: `video_viewer`
+ * - **Description**: VideoViewer
+ * - **Documentation**: https://prismic.io/docs/slices
+ */
+export type VideoViewerSlice = prismic.SharedSlice<
+  "video_viewer",
+  VideoViewerSliceVariation
+>;
+
 declare module "@prismicio/client" {
   interface CreateClient {
     (
@@ -805,10 +1007,18 @@ declare module "@prismicio/client" {
       ImageCardsSliceDefaultPrimary,
       ImageCardsSliceVariation,
       ImageCardsSliceDefault,
+      PersonSlice,
+      PersonSliceDefaultPrimary,
+      PersonSliceVariation,
+      PersonSliceDefault,
       QuoteSlice,
       QuoteSliceDefaultPrimary,
       QuoteSliceVariation,
       QuoteSliceDefault,
+      TableSlice,
+      TableSliceDefaultPrimary,
+      TableSliceVariation,
+      TableSliceDefault,
       TextSlice,
       TextSliceDefaultPrimary,
       TextSliceTwoColumnsPrimary,
@@ -821,6 +1031,10 @@ declare module "@prismicio/client" {
       TextWithImageSliceVariation,
       TextWithImageSliceDefault,
       TextWithImageSliceWithButton,
+      VideoViewerSlice,
+      VideoViewerSliceDefaultPrimary,
+      VideoViewerSliceVariation,
+      VideoViewerSliceDefault,
     };
   }
 }

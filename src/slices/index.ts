@@ -6,7 +6,10 @@ export const components = {
   hero: dynamic(() => import("./Hero")),
   image: dynamic(() => import("./Image")),
   image_cards: dynamic(() => import("./ImageCards")),
+  person: dynamic(() => import("./Person")),
   quote: dynamic(() => import("./Quote")),
+  table: dynamic(() => import("./Table")),
   text: dynamic(() => import("./Text")),
   text_with_image: dynamic(() => import("./TextWithImage")),
+  video_viewer: dynamic(() => import("./VideoViewer")),
 };

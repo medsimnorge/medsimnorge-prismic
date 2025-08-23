@@ -5,6 +5,8 @@ import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
+import { Bounded } from "@/components/Bounded";
+import { Heading } from "@/components/Heading";
 
 type Params = { uid: string };
 
@@ -32,7 +34,16 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   const client = createClient();
   const page = await client.getByUID("page", uid).catch(() => notFound());
 
-  return <SliceZone slices={page.data.slices} components={components} />;
+  return (
+    <>
+      <div className="mx-auto w-full max-w-6xl px-6 xl:px-0">
+        <Heading as="h1" size="lg">
+          {asText(page.data.title)}
+        </Heading>
+      </div>
+      <SliceZone slices={page.data.slices} components={components} />
+    </>
+  );
 }
 
 export async function generateStaticParams() {

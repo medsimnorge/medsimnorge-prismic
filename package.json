@@ -1,9 +1,9 @@
 {
-  "name": "nextjs-starter-prismic-multi-page",
+  "name": "medsimnorge-home",
   "version": "0.0.0",
   "private": true,
   "license": "Apache-2.0",
-  "author": "Prismic <contact@prismic.io> (https://prismic.io)",
+  "author": "Håkon Trønnes, MediWeb SOlutions",
   "scripts": {
     "dev": "concurrently \"npm:next:dev\" \"npm:slicemachine\" --names \"next,slicemachine\" --prefix-colors blue,magenta",
     "next:dev": "next",
@@ -14,16 +14,29 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@heroui/button": "^2.2.24",
+    "@heroui/card": "^2.2.23",
+    "@heroui/dropdown": "^2.3.24",
+    "@heroui/navbar": "^2.2.22",
+    "@heroui/system": "^2.4.20",
+    "@heroui/theme": "^2.4.20",
     "@prismicio/client": "^7.20.0",
     "@prismicio/next": "^2.0.1",
     "@prismicio/react": "^3.2.1",
+    "class-variance-authority": "^0.7.1",
     "clsx": "^2.1.1",
+    "framer-motion": "^12.23.12",
+    "lucide-react": "^0.539.0",
     "next": "^15.1.6",
-    "react": "^19.0.0",
-    "react-dom": "^19.0.0"
+    "next-video": "^2.2.3",
+    "nextjs-current-url": "^1.0.3",
+    "radix-ui": "^1.4.3",
+    "react": "^19.1.1",
+    "react-dom": "^19.1.1",
+    "tailwind-merge": "^3.3.1"
   },
   "devDependencies": {
-    "@slicemachine/adapter-next": "^0.3.82",
+    "@slicemachine/adapter-next": "^0.3.83",
     "@tailwindcss/aspect-ratio": "^0.4.2",
     "@tailwindcss/postcss": "^4.0.1",
     "@types/node": "^22.12.0",
@@ -35,8 +48,9 @@
     "postcss": "^8.5.1",
     "prettier": "^3.4.2",
     "prettier-plugin-tailwindcss": "^0.6.11",
-    "slice-machine-ui": "^2.18.0",
+    "slice-machine-ui": "^2.18.1",
     "tailwindcss": "^4.0.1",
+    "tw-animate-css": "^1.3.7",
     "typescript": "^5.7.3"
   }
 }

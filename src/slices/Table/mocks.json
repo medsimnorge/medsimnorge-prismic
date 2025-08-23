@@ -1,0 +1,97 @@
+[
+	{
+		"__TYPE__": "SharedSliceContent",
+		"variation": "default",
+		"primary": {
+			"title": {
+				"__TYPE__": "StructuredTextContent",
+				"value": [
+					{
+						"type": "paragraph",
+						"content": {
+							"text": "Commodo mollit ut laborum velit non."
+						}
+					}
+				]
+			},
+			"table": {
+				"__TYPE__": "TableContent",
+				"content": [
+					{
+						"key": "e565f85e-75d9-44dd-a926-eb4084ae24cf",
+						"type": "tableRow",
+						"content": [
+							{
+								"key": "a93020d9-0470-45fb-8092-a9c6051ee988",
+								"type": "tableHeader",
+								"content": {
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Exercitation."
+											}
+										}
+									]
+								}
+							},
+							{
+								"key": "2499b27e-1a30-4b0c-9f7e-9f5ae13cdedb",
+								"type": "tableHeader",
+								"content": {
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Exercitation."
+											}
+										}
+									]
+								}
+							}
+						]
+					},
+					{
+						"key": "9f833c84-68ae-43d6-9d71-f0d610577d98",
+						"type": "tableRow",
+						"content": [
+							{
+								"key": "ccb8ce85-b96e-4d7f-b7e4-10ade77b367c",
+								"type": "tableCell",
+								"content": {
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Eu dolor duis et irure reprehenderit ad."
+											}
+										}
+									]
+								}
+							},
+							{
+								"key": "bf7294d6-5836-4b6c-b41b-6aaeee76acc1",
+								"type": "tableCell",
+								"content": {
+									"__TYPE__": "StructuredTextContent",
+									"value": [
+										{
+											"type": "paragraph",
+											"content": {
+												"text": "Ea Lorem laboris eu nisi."
+											}
+										}
+									]
+								}
+							}
+						]
+					}
+				]
+			}
+		},
+		"items": []
+	}
+]
