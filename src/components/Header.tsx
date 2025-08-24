@@ -1,71 +1,167 @@
 'use client';
 
-import { Bounded } from "./Bounded";
-import {Navbar, NavbarBrand, NavbarContent, NavbarItem, NavbarMenu, NavbarMenuItem, NavbarMenuToggle} from "@heroui/navbar";
 import Link from "next/link";
+import { Slot } from "radix-ui"
+import { usePathname } from "next/navigation";
 import { asText, asLink } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
-import React from "react";
+import React, { useState, useEffect, useRef } from "react";
 import { settings, navigation } from "./client";
+import { Button } from "./ui/button";
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  navigationMenuTriggerStyle,
+} from "./ui/navigation-menu";
+import { cn } from "@/lib/utils";
 
 export default function Header() {
-    const [isMenuOpen, setIsMenuOpen] = React.useState(false);
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const menuRef = useRef<HTMLDivElement>(null);
+  const buttonRef = useRef<HTMLButtonElement>(null);
+  const pathname = usePathname();
 
-    return (
-      <Bounded as="header" yPadding="sm" className="sticky top-0">
-        <Navbar onMenuOpenChange={setIsMenuOpen}
-        classNames={{
-          item: [
-            "flex",
-            "relative",
-            "h-full",
-            "items-center",
-            "data-[active=true]:after:content-['']",
-            "data-[active=true]:after:absolute",
-            "data-[active=true]:after:bottom-0",
-            "data-[active=true]:after:left-0",
-            "data-[active=true]:after:right-0",
-            "data-[active=true]:after:h-[2px]",
-            "data-[active=true]:after:rounded-[2px]",
-            "data-[active=true]:after:bg-primary",
-          ],
-        }}
-    >
-      <NavbarBrand>
-        <PrismicNextImage field={settings.data.logo} width={100} height={100} />
-        <span className="ml-4 font-bold text-2xl">{asText(settings.data.siteTitle)}</span>
-      </NavbarBrand>
-      <NavbarMenuToggle
-          aria-label={isMenuOpen ? "Lukk" : "Åpne meny"}
-          className="sm:hidden"
-        />
-      <NavbarContent className="hidden sm:flex gap-4" justify="end">
-        {navigation.data?.links.map((item, index) => {
-            const linkUrl = asLink(item.link);
-            if (!linkUrl) return null;
-            return (
-                <NavbarItem key={index}>
-                    <Link href={linkUrl}>
-                        {asText(item.label)}
-                    </Link>
-                </NavbarItem>
-            );
-        })}
-      </NavbarContent>
-      <NavbarMenu>
-        {navigation.data?.links.map((item, index) => {
-          const linkUrl = asLink(item.link);
-          if (!linkUrl) return null;
-          return (
-            <NavbarMenuItem key={index}>
-            <Link className="w-full" href={linkUrl}>
-              {asText(item.label)}
-            </Link>
-          </NavbarMenuItem>
-          );
-        })}
-      </NavbarMenu>
-    </Navbar>
-    </Bounded>
-    );
-  }
+  // Lukk menyen ved klikk utenfor
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        menuRef.current &&
+        !menuRef.current.contains(event.target as Node) &&
+        buttonRef.current &&
+        !buttonRef.current.contains(event.target as Node)
+      ) {
+        setIsMenuOpen(false);
+      }
+    };
+
+    if (isMenuOpen) {
+      document.addEventListener('mousedown', handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
+  }, [isMenuOpen]);
+
+  // Lukk menyen ved navigering
+  const handleNavigation = () => {
+    setIsMenuOpen(false);
+  };
+
+  // Hjelpefunksjon for å sjekke om lenken er aktiv
+  const isActiveLink = (linkUrl: string) => {
+    // Håndter hjemmeside (/) spesielt
+    if (linkUrl === '/' && pathname === '/') {
+      return true;
+    }
+    // For andre sider, sjekk om pathname starter med linkUrl (for å håndtere nested routes)
+    if (linkUrl !== '/' && pathname.startsWith(linkUrl)) {
+      return true;
+    }
+    return false;
+  };
+
+  return (
+    <>
+      {/* Skip link for skjermlesere */}
+      <a
+        href="#main-content"
+        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
+      >
+        Hopp til hovedinnhold
+      </a>
+      
+      <header className="sticky top-0 bg-background z-50 py-4 md:py-6">
+        <div className="mx-auto w-full max-w-6xl px-4">
+          <div className="flex items-center justify-between">
+            {/* Logo og tittel */}
+            <div className="flex items-center">
+              <PrismicNextImage field={settings.data.logo} width={100} height={100} />
+              <span className="ml-4 font-bold text-2xl">{asText(settings.data.siteTitle)}</span>
+            </div>
+
+            {/* Desktop Navigation Menu */}
+            <div className="hidden md:block">
+              <NavigationMenu>
+                <NavigationMenuList>
+                  {navigation.data?.links.map((item, index) => {
+                    const linkUrl = asLink(item.link);
+                    if (!linkUrl) return null;
+                    const isActive = isActiveLink(linkUrl);
+                    
+                    return (
+                      <NavigationMenuItem key={index}>
+                        <NavigationMenuLink
+                          asChild
+                          className={cn(
+                            navigationMenuTriggerStyle(),
+                            isActive && "bg-accent text-accent-foreground"
+                          )}
+                          data-active={isActive}
+                          aria-current={isActive ? "page" : undefined}
+                        >
+                          <Link href={linkUrl}>
+                            {asText(item.label)}
+                          </Link>
+                        </NavigationMenuLink>
+                      </NavigationMenuItem>
+                    );
+                  })}
+                </NavigationMenuList>
+              </NavigationMenu>
+            </div>
+
+            {/* Mobil meny knapp */}
+            <div className="md:hidden">
+              <Button 
+                ref={buttonRef}
+                id="menu-btn" 
+                onClick={() => setIsMenuOpen(!isMenuOpen)} 
+                className="focus:outline-none"
+                variant="ghost"
+                size="sm"
+              >
+                ☰
+              </Button>
+            </div>
+          </div>
+
+          {/* Mobil meny overlay */}
+          <div 
+            ref={menuRef}
+            className={`fixed inset-0 top-18 bg-background/95 backdrop-blur-sm transition-all duration-300 ease-in-out ${
+              isMenuOpen ? 'opacity-100 visible' : 'opacity-0 invisible'
+            }`}
+          >
+            <div className="flex flex-col items-center justify-center h-full space-y-6">
+              {navigation.data?.links.map((item, index) => {
+                const linkUrl = asLink(item.link);
+                if (!linkUrl) return null;
+                const isActive = isActiveLink(linkUrl);
+                
+                return (
+                  <Link 
+                    key={index}
+                    href={linkUrl} 
+                    className={cn(
+                      "text-xl font-medium transition-colors duration-200 hover:text-primary",
+                      isActive && "text-primary font-semibold"
+                    )}
+                    onClick={handleNavigation}
+                    aria-current={isActive ? "page" : undefined}
+                  >
+                    {asText(item.label)}
+                  </Link>
+                );
+              })}
+            </div>
+          </div>
+        </div>
+      </header>
+    </>
+  )
+}

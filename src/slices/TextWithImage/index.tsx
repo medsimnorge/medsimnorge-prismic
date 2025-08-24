@@ -12,26 +12,25 @@ const TextWithImage: FC<TextWithImageProps> = ({ slice }) => {
   const image = slice.primary.image;
 
   return (
-    <Bounded as="section" className="bg-white">
+    <Bounded as="div" className="bg-white">
       <div className="grid grid-cols-1 items-center gap-8 md:grid-cols-2">
-        <div className="max-h-56">
+        <div className="max-h-38">
           <PrismicRichText field={slice.primary.text} />
           {slice.variation === "withButton" && slice.primary.buttonLink ? (
             <PrismicNextLink
               field={slice.primary.buttonLink}
               className="font-semibold"
             >
-              {slice.primary.buttonText || "Learn more"}
+              {slice.primary.buttonText || "Les mer"}
             </PrismicNextLink>
           ) : null}
         </div>
-        <div>
+        <div className="max-h-38">
           {isFilled.image(image) && (
-            <div className="bg-gray-100" style={{ aspectRatio: "16/9" }}>
+            <div className="bg-gray-100 h-full">
               <PrismicNextImage
                 field={image}
-                sizes="100vw"
-                className="w-full"
+                className="w-full h-full object-contain"
               />
             </div>
           )}

@@ -5,7 +5,7 @@ import { Bounded } from "@/components/Bounded";
 import { Heading } from "@/components/Heading";
 import { PrismicRichText } from "@/components/PrismicRichText";
 import { PrismicNextImage } from "@prismicio/next";
-import {Card, CardHeader, CardBody} from "@heroui/card";
+
 /**
  * Props for `Person`.
  */
@@ -16,18 +16,31 @@ export type PersonProps = SliceComponentProps<Content.PersonSlice>;
  */
 const Person: FC<PersonProps> = ({ slice }) => {
   return (
-    <Bounded as="div" className="bg-white leading-relaxed max-h-36" yPadding="sm">
-      <Card className="py-4">
-      <CardHeader className="pb-0 pt-2 px-4 flex-col items-start">
-        <PrismicNextImage field={slice.primary.image} height={150} width={slice.primary.image.dimensions?.width} className="object-cover rounded" />
-      </CardHeader>
-      <CardBody className="overflow-visible py-2">
-        <Heading as="h3" size="sm">
-          {slice.primary.name}
-        </Heading>
-        <PrismicRichText field={slice.primary.description} />
-      </CardBody>
-    </Card>
+    <Bounded as="div" className="bg-white leading-relaxed w-full" yPadding="sm">
+      <div className="grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 items-start">
+        {/* Image - left side on desktop, top on mobile */}
+        <div className="flex justify-center md:justify-start">
+          <PrismicNextImage 
+            field={slice.primary.image} 
+            height={150} 
+            width={150} 
+            className="object-cover rounded-lg shadow-md" 
+          />
+        </div>
+        
+        {/* Content - right side on desktop, bottom on mobile */}
+        <div className="space-y-3">
+          <Heading as="h3" size="sm">
+            {slice.primary.name}
+          </Heading>
+          {slice.primary.job_title && (
+            <p className="text-sm text-gray-600 font-medium">
+              {slice.primary.job_title}
+            </p>
+          )}
+          <PrismicRichText field={slice.primary.description} />
+        </div>
+      </div>
     </Bounded>
   )
 };
