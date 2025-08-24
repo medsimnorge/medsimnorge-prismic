@@ -3,10 +3,11 @@ import "./globals.css";
 import { Inter } from "next/font/google";
 import { repositoryName } from "@/prismicio";
 import { PrismicPreview } from "@prismicio/next";
-import { HeroUIProvider } from "@heroui/system";
 import Header from "@/components/Header";
-import { settings } from "@/components/client";
+import Footer from "@/components/Footer";
 import type { Metadata } from "next";
+import { createClient } from "@/prismicio";
+import { AptabaseProvider } from '@aptabase/react';
 
 const inter = Inter({
   subsets: ["latin"],
@@ -14,25 +15,35 @@ const inter = Inter({
   variable: "--font-inter",
 });
 
-export const metadata: Metadata = {
-  icons: {
-    icon: settings.data.logo.url,
-    shortcut: settings.data.logo.url,
-    apple: settings.data.logo.url,
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const client = createClient();
+  const settings = await client.getSingle("settings");
+  
+  return {
+    icons: {
+      icon: settings.data.logo?.url || undefined,
+      shortcut: settings.data.logo?.url || undefined,
+      apple: settings.data.logo?.url || undefined,
+    },
+  };
+}
 
 export default async function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
+  const client = createClient();
+  const settings = await client.getSingle("settings");
+  const navigation = await client.getSingle("navigation");
+  
   return (
     <html lang="no" className={inter.variable}>
       <body className="overflow-x-hidden antialiased">
-      <HeroUIProvider>
-        <Header />
-        <main id="main-content">
-          {children}
-        </main>
-        <PrismicPreview repositoryName={repositoryName} />
-      </HeroUIProvider>
+        <AptabaseProvider appKey="A-EU-4313739178">
+          <Header settings={settings} navigation={navigation} />
+          <main id="main-content">
+            {children}
+          </main>
+          <Footer logo={settings.data.logo} siteTitle={settings.data.siteTitle} />
+          <PrismicPreview repositoryName={repositoryName} />
+        </AptabaseProvider>
       </body>
     </html>
   );

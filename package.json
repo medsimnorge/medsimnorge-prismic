@@ -14,14 +14,9 @@
     "format": "prettier --write ."
   },
   "dependencies": {
+    "@aptabase/react": "^0.4.0",
     "@headlessui/react": "^2.2.7",
     "@heroicons/react": "^2.2.0",
-    "@heroui/button": "^2.2.24",
-    "@heroui/card": "^2.2.23",
-    "@heroui/dropdown": "^2.3.24",
-    "@heroui/navbar": "^2.2.22",
-    "@heroui/system": "^2.4.20",
-    "@heroui/theme": "^2.4.20",
     "@prismicio/client": "^7.20.0",
     "@prismicio/next": "^2.0.1",
     "@prismicio/react": "^3.2.1",

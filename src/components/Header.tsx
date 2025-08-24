@@ -6,7 +6,6 @@ import { usePathname } from "next/navigation";
 import { asText, asLink } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
 import React, { useState, useEffect, useRef } from "react";
-import { settings, navigation } from "./client";
 import { Button } from "./ui/button";
 import {
   NavigationMenu,
@@ -18,8 +17,14 @@ import {
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
 import { cn } from "@/lib/utils";
+import type { SettingsDocument, NavigationDocument } from "../../prismicio-types";
 
-export default function Header() {
+interface HeaderProps {
+  settings: SettingsDocument;
+  navigation: NavigationDocument;
+}
+
+export default function Header({ settings, navigation }: HeaderProps) {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const menuRef = useRef<HTMLDivElement>(null);
   const buttonRef = useRef<HTMLButtonElement>(null);
@@ -68,13 +73,13 @@ export default function Header() {
   return (
     <>
       {/* Skip link for skjermlesere */}
-      <a
+      <Link
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
       >
         Hopp til hovedinnhold
-      </a>
-      
+      </Link>
+
       <header className="sticky top-0 bg-background z-50 py-4 md:py-6">
         <div className="mx-auto w-full max-w-6xl px-4">
           <div className="flex items-center justify-between">
@@ -148,8 +153,8 @@ export default function Header() {
                     key={index}
                     href={linkUrl} 
                     className={cn(
-                      "text-xl font-medium transition-colors duration-200 hover:text-primary",
-                      isActive && "text-primary font-semibold"
+                      "text-xl font-medium transition-colors duration-200 hover:text-secondary",
+                      isActive && "text-secondary font-semibold"
                     )}
                     onClick={handleNavigation}
                     aria-current={isActive ? "page" : undefined}

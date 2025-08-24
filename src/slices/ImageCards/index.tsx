@@ -7,6 +7,7 @@ import { Bounded } from "@/components/Bounded";
 import { Heading } from "@/components/Heading";
 import { ConditionalWrap } from "@/components/ConditionalWrap";
 import { PrismicRichText } from "@/components/PrismicRichText";
+import { Card, CardContent, CardFooter } from "@/components/ui/card";
 
 type ImageCardProps = {
   card: Content.ImageCardsSliceDefaultPrimaryCardsItem;
@@ -16,7 +17,7 @@ const ImageCard: FC<ImageCardProps> = ({ card }) => {
   const image = card.image;
 
   return (
-    <li className="grid gap-8">
+    <Card className="overflow-hidden">
       {isFilled.image(image) && (
         <div className="bg-gray-100">
           <ConditionalWrap
@@ -31,17 +32,17 @@ const ImageCard: FC<ImageCardProps> = ({ card }) => {
           </ConditionalWrap>
         </div>
       )}
-      <div className="leading-relaxed">
+      <CardContent className="leading-relaxed">
         <PrismicRichText field={card.text} />
-      </div>
+      </CardContent>
       {isFilled.link(card.buttonLink) && (
-        <div>
-          <PrismicNextLink field={card.buttonLink} className="font-semibold">
+        <CardFooter>
+          <PrismicNextLink field={card.buttonLink} className="font-semibold text-primary hover:underline">
             {card.buttonText || "More Info"}
           </PrismicNextLink>
-        </div>
+        </CardFooter>
       )}
-    </li>
+    </Card>
   );
 };
 
@@ -56,11 +57,11 @@ const ImageCards = ({ slice }: ImageCardsProps) => {
             <PrismicText field={slice.primary.heading} />
           </Heading>
         )}
-        <ul className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
+        <div className="grid grid-cols-1 items-start gap-8 md:grid-cols-2">
           {slice.primary.cards.map((card) => (
             <ImageCard key={card.image.url} card={card} />
           ))}
-        </ul>
+        </div>
       </div>
     </Bounded>
   );
