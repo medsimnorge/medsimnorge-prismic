@@ -14,7 +14,7 @@ export default function Footer({ logo, siteTitle }: FooterProps) {
   const siteName = asText(siteTitle) || "MedSimNorge";
 
   return (
-    <footer className="bg-card border-t border-border py-8 md:py-12">
+    <footer className="bg-gray-800 text-gray-50 border-t border-border py-6 md:py-8">
       <div className="mx-auto w-full max-w-6xl px-4">
         <div className="flex flex-col md:flex-row items-center justify-between gap-6">
           {/* Logo og nettstedsnavn */}
@@ -22,21 +22,21 @@ export default function Footer({ logo, siteTitle }: FooterProps) {
             {logo && (
               <PrismicNextImage 
                 field={logo} 
-                width={80} 
-                height={80} 
+                width={60} 
+                height={60} 
                 className="w-16 h-16 md:w-20 md:h-20"
               />
             )}
-            <span className="ml-3 font-bold text-xl md:text-2xl text-card-foreground">{siteName}</span>
+            <span className="ml-3 font-bold text-xl md:text-2xl">{siteName}</span>
           </div>
 
           {/* Copyright og lenker */}
-          <div className="flex flex-col items-center md:items-end gap-2 text-sm text-card-foreground/80">
-            <p>© {currentYear} {siteName}. Nettside av <Link href="https://www.mediweb.no" className="hover:text-card-foreground transition-colors underline-offset-4 hover:underline">MediWeb Solutions</Link></p>
+          <div className="flex flex-col items-center md:items-end gap-2 text-sm">
+            <p>© {currentYear} {siteName}. Nettside av <Link href="https://www.mediweb.no" className="hover:text-gray-100 transition-colors underline-offset-4 hover:underline">MediWeb Solutions</Link></p>
             <div className="flex gap-4">
               <Link 
                 href="/personvern" 
-                className="hover:text-card-foreground transition-colors underline-offset-4 hover:underline"
+                className="hover:text-gray-100 transition-colors underline-offset-4 hover:underline"
               >
                 Personvernpolicy
               </Link>

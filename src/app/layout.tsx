@@ -8,6 +8,7 @@ import Footer from "@/components/Footer";
 import type { Metadata } from "next";
 import { createClient } from "@/prismicio";
 import { AptabaseProvider } from '@aptabase/react';
+import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -44,6 +45,11 @@ export default async function RootLayout({ children }: Readonly<{ children: Reac
           <Footer logo={settings.data.logo} siteTitle={settings.data.siteTitle} />
           <PrismicPreview repositoryName={repositoryName} />
         </AptabaseProvider>
+        <Script
+          src="https://app.rybbit.io/api/script.js"
+          data-site-id="2245"
+          strategy="afterInteractive"
+        />
       </body>
     </html>
   );

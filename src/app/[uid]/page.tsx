@@ -5,7 +5,6 @@ import { SliceZone } from "@prismicio/react";
 
 import { createClient } from "@/prismicio";
 import { components } from "@/slices";
-import { Bounded } from "@/components/Bounded";
 import { Heading } from "@/components/Heading";
 
 type Params = { uid: string };
@@ -37,7 +36,7 @@ export default async function Page({ params }: { params: Promise<Params> }) {
   return (
     <>
       <div className="mx-auto w-full max-w-6xl px-6 xl:px-0">
-        <Heading as="h1" size="lg">
+        <Heading as="h1" size="lg" className="mt-2 mb-6 md:mb-10">
           {asText(page.data.title)}
         </Heading>
       </div>

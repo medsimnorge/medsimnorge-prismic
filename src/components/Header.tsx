@@ -1,7 +1,6 @@
 'use client';
 
 import Link from "next/link";
-import { Slot } from "radix-ui"
 import { usePathname } from "next/navigation";
 import { asText, asLink } from "@prismicio/client";
 import { PrismicNextImage } from "@prismicio/next";
@@ -9,11 +8,9 @@ import React, { useState, useEffect, useRef } from "react";
 import { Button } from "./ui/button";
 import {
   NavigationMenu,
-  NavigationMenuContent,
   NavigationMenuItem,
   NavigationMenuLink,
   NavigationMenuList,
-  NavigationMenuTrigger,
   navigationMenuTriggerStyle,
 } from "./ui/navigation-menu";
 import { cn } from "@/lib/utils";
@@ -72,7 +69,7 @@ export default function Header({ settings, navigation }: HeaderProps) {
 
   return (
     <>
-      {/* Skip link for skjermlesere */}
+      {/* Skip-link for skjermlesere */}
       <Link
         href="#main-content"
         className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-50 focus:bg-primary focus:text-primary-foreground focus:px-4 focus:py-2 focus:rounded-md focus:outline-none focus:ring-2 focus:ring-ring"
@@ -89,7 +86,7 @@ export default function Header({ settings, navigation }: HeaderProps) {
               <span className="ml-4 font-bold text-2xl">{asText(settings.data.siteTitle)}</span>
             </div>
 
-            {/* Desktop Navigation Menu */}
+            {/* Desktop Nav Meny */}
             <div className="hidden md:block">
               <NavigationMenu>
                 <NavigationMenuList>
@@ -100,19 +97,19 @@ export default function Header({ settings, navigation }: HeaderProps) {
                     
                     return (
                       <NavigationMenuItem key={index}>
-                        <NavigationMenuLink
-                          asChild
-                          className={cn(
-                            navigationMenuTriggerStyle(),
-                            isActive && "bg-accent text-accent-foreground"
-                          )}
-                          data-active={isActive}
-                          aria-current={isActive ? "page" : undefined}
-                        >
-                          <Link href={linkUrl}>
-                            {asText(item.label)}
-                          </Link>
-                        </NavigationMenuLink>
+                          <NavigationMenuLink
+                            asChild
+                            className={cn(
+                              navigationMenuTriggerStyle(),
+                              isActive && "bg-accent text-accent-foreground"
+                            )}
+                            data-active={isActive}
+                            aria-current={isActive ? "page" : undefined}
+                          >
+                            <Link href={linkUrl}>
+                              {asText(item.label)}
+                            </Link>
+                          </NavigationMenuLink>
                       </NavigationMenuItem>
                     );
                   })}

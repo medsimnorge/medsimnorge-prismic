@@ -38,7 +38,7 @@ const ImageCard: FC<ImageCardProps> = ({ card }) => {
       {isFilled.link(card.buttonLink) && (
         <CardFooter>
           <PrismicNextLink field={card.buttonLink} className="font-semibold text-primary hover:underline">
-            {card.buttonText || "More Info"}
+            {card.buttonText || "Les mer"}
           </PrismicNextLink>
         </CardFooter>
       )}
