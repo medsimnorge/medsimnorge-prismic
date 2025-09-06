@@ -101,7 +101,7 @@ export default function Header({ settings, navigation }: HeaderProps) {
                             asChild
                             className={cn(
                               navigationMenuTriggerStyle(),
-                              isActive && "bg-accent text-accent-foreground"
+                              isActive && "text-blue-900 font-semibold"
                             )}
                             data-active={isActive}
                             aria-current={isActive ? "page" : undefined}
@@ -150,8 +150,8 @@ export default function Header({ settings, navigation }: HeaderProps) {
                     key={index}
                     href={linkUrl} 
                     className={cn(
-                      "text-xl font-medium transition-colors duration-200 hover:text-secondary",
-                      isActive && "text-secondary font-semibold"
+                      "text-xl font-medium transition-colors duration-200",
+                      isActive && "text-blue-900 font-semibold"
                     )}
                     onClick={handleNavigation}
                     aria-current={isActive ? "page" : undefined}
